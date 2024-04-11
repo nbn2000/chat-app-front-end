@@ -1,0 +1,43 @@
+.main {
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: #264653;
+  }
+  
+  .main aside {
+    width: 330px;
+    height: 100%;
+    border-right: 1px solid #cccccc54;
+  }
+  
+  .main > section {
+    width: calc(100% - 330px);
+    height: 100%;
+  }
+
+  /* @media (max-width: 925px) {
+    .main > section {
+      width: 100%;
+      display: block;
+    }
+
+    .main aside {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px){
+    .main aside {
+      width: 100%;
+      display:block;
+    }
+
+    .main > section {
+      display: none;
+    }
+  } */
