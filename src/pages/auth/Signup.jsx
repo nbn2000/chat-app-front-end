@@ -2,34 +2,36 @@ import React from "react";
 import "./Sign.css";
 import { Link, useNavigate } from "react-router-dom";
 import ShowAndHidePassword from "../../components/showandhide/ShowAndHidePassword";
-import axios from "axios"
-import {PatternFormat} from "react-number-format"
-import {enqueueSnackbar} from "notistack"
+import axios from "axios";
+import { PatternFormat } from "react-number-format";
+import { enqueueSnackbar } from "notistack";
 
-const api = "http://localhost:8080"
+const url = process.env.REACT_APP_BASE_URL;
 export const Signup = () => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const value = Object.fromEntries(formData.entries())
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const value = Object.fromEntries(formData.entries());
     const config = {
       method: "post",
-      url: `${api}/signup`,
-      headers: {"Content-Type": "application/json"},
-      data: JSON.stringify(value) 
-    }
+      url: `${url}/signup`,
+      headers: { "Content-Type": "application/json" },
+      data: JSON.stringify(value),
+    };
 
-    axios(config).then(res => {
-      const {message, variant} = res?.data
-      enqueueSnackbar(message, {variant})
-      e.target.reset()
-      navigate("/signin")
-    }).catch(err => {
-      const {message, variant} = err?.response?.data
-      enqueueSnackbar(message, {variant})
-    })
-  }
+    axios(config)
+      .then((res) => {
+        const { message, variant } = res?.data;
+        enqueueSnackbar(message, { variant });
+        e.target.reset();
+        navigate("/signin");
+      })
+      .catch((err) => {
+        const { message, variant } = err?.response?.data;
+        enqueueSnackbar(message, { variant });
+      });
+  };
   return (
     <div className="sign">
       <form onSubmit={handleSubmit}>
@@ -50,12 +52,18 @@ const navigate = useNavigate()
 
         <label>
           <span>Telephone Number</span>
-          <PatternFormat name="phone" format="+998 ## ### ####" allowEmptyFormatting mask="_" autoComplete="off"/>
+          <PatternFormat
+            name="phone"
+            format="+998 ## ### ####"
+            allowEmptyFormatting
+            mask="_"
+            autoComplete="off"
+          />
         </label>
 
         <label>
           <span>Password</span>
-          <ShowAndHidePassword/>
+          <ShowAndHidePassword />
         </label>
 
         <label>
